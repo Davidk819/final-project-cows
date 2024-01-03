@@ -11,15 +11,17 @@ import Stage1 from './components/Stage1/Stage1';
 import Stage2 from './components/Stage2/Stage2';
 import Headers2 from './components/Headers2/Headers2';
 import Stage3 from './components/Stage3/Stage3';
+import HomePage from './components/HomePage/HomePage';
 
 export const router = createBrowserRouter([
-  // {
-  //   path: '/home',
-  //   element: <Headers />,
-  // },
   {
-    path: '/home/Headers2',
-    element: <Headers2 />,
+    path: '/',
+    element: <Navi />,
+  },
+  {
+    path: '/home',
+    element: <HomePage />,
+
   },
   {
     path: '/home/SignIn',

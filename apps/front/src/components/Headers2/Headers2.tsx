@@ -13,20 +13,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-
-
-
 export default function Headers2() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-
-
-    const handleClick = (path: string) => {
-        navigate(`/home/${path}`);
-        console.log("sds");
-        
-
-    };
+  const handleClick = (path: string) => {
+    navigate(`/home/${path}`);
+  };
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -51,6 +43,7 @@ export default function Headers2() {
                     className="h-8 w-auto rounded-full"
                     src="https://as2.ftcdn.net/v2/jpg/00/51/47/41/1000_F_51474102_UEXRLTDrKHh5nU4HSQ9RFhzlwDytW76r.jpg"
                     alt="Your Company"
+                    onClick={() => handleClick('')}
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -66,7 +59,9 @@ export default function Headers2() {
                           'rounded-md px-3 py-2 text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
-                      >{item.name}</div>
+                      >
+                        {item.name}
+                      </div>
                       //   <a
                       //     key={item.name}
                       //     href={item.href}
@@ -100,7 +95,7 @@ export default function Headers2() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
                       />
                     </Menu.Button>

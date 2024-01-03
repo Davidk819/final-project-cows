@@ -9,7 +9,7 @@ export const Name = sequelize.define('Name', {
 });
 
 export const Cow = sequelize.define(
-  'Cow',
+  'cow',
   {
     caw_id: {
       type: DataTypes.STRING,
@@ -19,7 +19,7 @@ export const Cow = sequelize.define(
       type: DataTypes.DATEONLY,
     },
     enter_time: {
-      type: DataTypes.TIME,
+      type: DataTypes.STRING,
     },
     caw_num: {
       type: DataTypes.INTEGER,
@@ -29,11 +29,17 @@ export const Cow = sequelize.define(
       allowNull: true,
     },
     stage: {
-      type: DataTypes.INTEGER,
-      defaultValue: 1,
-    },
+      
+    }
   },
   {
     // Other model options go here
   }
 );
+export const createTable = async ()=>{
+  try {
+    await Cow.sync()
+  } catch (error) {
+    console.error(error);
+  }
+}

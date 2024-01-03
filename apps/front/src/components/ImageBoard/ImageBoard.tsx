@@ -3,6 +3,7 @@ import reaImage from '../Stage1/rea.png';
 import { useNavigate } from 'react-router-dom';
 import { atom, useAtom } from 'jotai';
 import { mooID, photoURL } from '../../mainAtom';
+import CowCard from '../CawCard/CawCard';
 
 const ImageBoard = () => {
   const canvasElement = useRef<HTMLCanvasElement | null>(null);
@@ -66,6 +67,7 @@ const ImageBoard = () => {
         console.log(canvas.toDataURL());
         setPhoto(canvas.toDataURL());
       }
+      clean2()
     }
   };
 
@@ -83,28 +85,26 @@ const ImageBoard = () => {
   };
 
   return (
-    <div>
-      <div style={{ width: '400px', border: '1px solid black' }}>
+    <div className="flex items-center justify-center space-x-8">
+      <div className="border-2 border-black p-4">
+        {/* <CowCard ></CowCard> */}
         <canvas
-          style={{ cursor: 'crosshair', border: '1px solid black' }}
+          className="cursor-crosshair border border-black"
           width="400px"
           height="300px"
           ref={canvasElement}
           onClick={markPointOnImage}
         ></canvas>
-        <div>
-          <div style={{ cursor: 'pointer' }} onClick={getPng}>
-            Save to console
+        <div className="flex justify-between mt-4">
+          <div className="cursor-pointer" onClick={getPng}>
+            Save
           </div>
-          <div style={{ cursor: 'pointer' }} onClick={clean2}>
+          <div className="cursor-pointer" onClick={clean2}>
             Clean
           </div>
         </div>
       </div>
-      <button onClick={() => navigate(`/home/main`)} style={{ border: '2px solid indigo', width: '24px' }}>
-        Main
-      </button>
-      <h1>{photo}</h1>
+
     </div>
   );
 };
