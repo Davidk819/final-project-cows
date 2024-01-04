@@ -4,8 +4,6 @@ import Headers2 from '../Headers2/Headers2';
 import { CowNumber } from '../typs';
 import CowCard from '../CawCard/CawCard';
 
-
-
 export default function HomePage() {
   const [data, setData] = useState<CowNumber[]>([] || null);
 
@@ -17,27 +15,29 @@ export default function HomePage() {
         if (newData) {
           setData(newData);
         }
-      } catch {}
+      } catch (err) {
+        console.log(err);
+      }
     };
     fetchData();
   }, []);
+  if (!data) return <div>err</div>;
 
   return (
-    <div className="h-screen flex flex-col">
+    <>
       <Headers2></Headers2>
-      <CowCard cowProps={data[0]} ></CowCard>
-
-      <div className="flex-1 flex justify-center items-center">
-        {data.map((num) => (
-          <div
-            key={num.cow_id}
-            className="flex-col border border-solid border-black p-4 bg-slate-100 m-8"
-          >
-            <h1>Number: {num.cow_num}</h1>
-            <h2>Status: {num.status}</h2>
-          </div>
-        ))}
+      <div className=" flex flex-col">
+        <div>{data[0].caw_num}</div>
+        <div className="flex-1 flex flex-wrap justify-center ">
+          {data.map((num) => (
+            <div key={num.enter_time}>
+              <CowCard key={num.enter_time} cowProps={num}></CowCard>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
+  
+  
 }

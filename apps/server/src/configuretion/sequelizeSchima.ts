@@ -28,9 +28,7 @@ export const Cow = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    stage: {
-      
-    }
+
   },
   {
     // Other model options go here

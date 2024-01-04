@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 export const insertNewCow = async (status: string, cawNum: number) => {
   try {
     await Cow.sync();
-    let corent_time = new Date().toLocaleTimeString([], {
+    const corent_time = new Date().toLocaleTimeString([], {
       hour: '2-digit',
       minute: '2-digit',
     });
@@ -14,11 +14,11 @@ export const insertNewCow = async (status: string, cawNum: number) => {
         caw_id: uuidv4(),
         enter_date: new Date(),
         enter_time: corent_time,
-        caw_num: cawNum,
+        cow_num: cawNum,
         status: status,
       },
       {
-        fields: ['caw_id', 'enter_date', 'enter_time', 'caw_num', 'status'],
+        fields: ['caw_id', 'enter_date', 'enter_time', 'cow_num', 'status'],
       }
     );
     return newCow;
