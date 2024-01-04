@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
 
-const TableExample = () => {
-  const [selectedNumber, setSelectedNumber] = useState(2);
+type Props = {
+    KosherNumbers: number[]
+    setNum: React.Dispatch<React.SetStateAction<number>>
+    selectedNumber: number
 
-  const numbersArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+}
+
+
+export default function Table({KosherNumbers ,selectedNumber, setNum}: Props)  {
+
 
   const handleNumberClick = (number: number) => {
-    console.log(selectedNumber);
-    setSelectedNumber(number);
+    setNum(number);
   };
 
   return (
     <>
     <div className="grid grid-cols-5 gap-1">
-      {numbersArray.map((number) => (
+      {KosherNumbers.map((number) => (
         <div
           key={number}
           className="relative"
@@ -38,6 +42,5 @@ const TableExample = () => {
   );
 };
 
-export default TableExample;
 
 

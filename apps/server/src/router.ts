@@ -20,7 +20,7 @@ export const appRouter = router({
   }),
   getKosherNumbers: publicProcedure.query(async () => {
     const data = await getKosherNumbersFromDB();
-    return data;
+    return data.map(cow => (cow.dataValues.cow_num))
   }),
   
 });

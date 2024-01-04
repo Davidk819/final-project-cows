@@ -10,6 +10,13 @@ interface CowInstance extends Model<CowAttributes>, CowAttributes {}
 
 
 
+export const Stage = sequelize.define(
+  "stage", 
+  {
+
+  }
+)
+
 export const Cow = sequelize.define<CowInstance>(
   'cow',
   {
