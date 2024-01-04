@@ -10,11 +10,10 @@ export default function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newData = (await trpc.getAll.query()) as unknown as CowNumber[];
+        const newData = await trpc.getAll.query();
+        setData(newData)
         console.log(newData);
-        if (newData) {
-          setData(newData);
-        }
+
       } catch (err) {
         console.log(err);
       }
@@ -27,7 +26,6 @@ export default function HomePage() {
     <>
       <Headers2></Headers2>
       <div className=" flex flex-col">
-        <div>{data[0].caw_num}</div>
         <div className="flex-1 flex flex-wrap justify-center ">
           {data.map((num) => (
             <div key={num.enter_time}>

@@ -1,12 +1,9 @@
 import { createHTTPServer } from '@trpc/server/adapters/standalone';
-import { sequelize, sequelizeConnection } from './configuretion/postgresql';
-import { json } from 'sequelize';
+import {sequelizeConnection } from './configuretion/postgresql';
 import { appRouter } from './router';
 import cors from 'cors';
-import { initTRPC } from '@trpc/server';
+// import { createTable } from './configuretion/sequelizeSchima';
 
-const t = initTRPC.create();
-const middleware  = t.middleware
 
 
 

@@ -18,7 +18,9 @@ export default function Stage3() {
     const newCow = await trpc.addCow.mutate({
       status: selectedStatus,
       cow_num:parseInt(numberInput),
-    });
+    })
+    console.log(newCow);
+    
     setSelectedStatus('');
     setNumberInput("")
   };

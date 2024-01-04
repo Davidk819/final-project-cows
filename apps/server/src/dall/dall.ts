@@ -1,4 +1,3 @@
-import { json } from 'sequelize';
 import { Cow } from '../configuretion/sequelizeSchima';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -9,18 +8,19 @@ export const insertNewCow = async (status: string, cawNum: number) => {
       hour: '2-digit',
       minute: '2-digit',
     });
-    const newCow = await Cow.create(
+    const newCow  = await Cow.create(
       {
-        caw_id: uuidv4(),
+        cow_id: uuidv4(),
         enter_date: new Date(),
         enter_time: corent_time,
         cow_num: cawNum,
         status: status,
       },
       {
-        fields: ['caw_id', 'enter_date', 'enter_time', 'cow_num', 'status'],
+        fields: ['cow_id', 'enter_date', 'enter_time', 'cow_num', 'status'],
       }
     );
+
     return newCow;
   } catch (error) {
     console.error('Error creating cow:', error);

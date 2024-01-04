@@ -1,17 +1,19 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import {  DataTypes } from 'sequelize';
 import { sequelize } from './postgresql';
-import { v4 as uuidv4 } from 'uuid';
+import {  Model } from 'sequelize';
+import { CowAttributes } from '../typs';
 
 
-export const Name = sequelize.define('Name', {
-  name_name: { type: DataTypes.STRING, allowNull: true },
-  age: { type: DataTypes.INTEGER, allowNull: true },
-});
 
-export const Cow = sequelize.define(
+
+interface CowInstance extends Model<CowAttributes>, CowAttributes {}
+
+
+
+export const Cow = sequelize.define<CowInstance>(
   'cow',
   {
-    caw_id: {
+    cow_id: {
       type: DataTypes.STRING,
       primaryKey: true,
     },
@@ -21,23 +23,27 @@ export const Cow = sequelize.define(
     enter_time: {
       type: DataTypes.STRING,
     },
-    caw_num: {
+    cow_num: {
       type: DataTypes.INTEGER,
     },
     status: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-
+    
   },
   {
     // Other model options go here
   }
-);
-export const createTable = async ()=>{
-  try {
-    await Cow.sync()
-  } catch (error) {
-    console.error(error);
+  );
+  export const createTable = async ()=>{
+    try {
+      await Cow.sync()
+    } catch (error) {
+      console.error(error);
+    }
   }
-}
+  export const Name = sequelize.define('Name', {
+    name_name: { type: DataTypes.STRING, allowNull: true },
+    age: { type: DataTypes.INTEGER, allowNull: true },
+  });
