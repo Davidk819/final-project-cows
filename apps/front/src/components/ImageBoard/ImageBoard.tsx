@@ -1,14 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
-import reaImage from '../Stage1/rea.png';
+import reaImage from '../Stage2/rea.png';
 import { useNavigate } from 'react-router-dom';
-import { atom, useAtom } from 'jotai';
-import { mooID, photoURL } from '../../mainAtom';
-import CowCard from '../CawCard/CawCard';
+import { useAtom } from 'jotai';
+import { photoURL, cowNumAtom } from '../../mainAtom';
+// import CowCard from '../CawCard/CawCard';
 
-const ImageBoard = () => {
+type Props = {
+  setImageUrl: (str: string) => void,
+  handleSave: () => void,
+}
+
+const ImageBoard = ({setImageUrl, handleSave} :Props) => {
   const canvasElement = useRef<HTMLCanvasElement | null>(null);
   const navigate = useNavigate();
   const [photo, setPhoto] = useAtom(photoURL);
+
   const [signatureStart, setSignatureStart] = useState(false);
 
   useEffect(() => {
@@ -64,9 +70,9 @@ const ImageBoard = () => {
     if (signatureStart) {
       const canvas = canvasElement.current;
       if (canvas) {
-        console.log(canvas.toDataURL());
-        setPhoto(canvas.toDataURL());
+        setImageUrl(canvas.toDataURL())
       }
+      handleSave()
       clean2()
     }
   };
