@@ -1,5 +1,6 @@
 import {
   getAll,
+  getCowDataFromDB,
   getKosherNumbersFromDB,
   getNumbersByStageFromDB,
   insertNewCow,
@@ -29,7 +30,7 @@ export const appRouter = router({
   getAllByStage: publicProcedure.input(z.number()).query(async ({ input }) => {
     const stage = input;
     const data = await getNumbersByStageFromDB(stage);
-    return data.map((cow) => cow.dataValues.cow_num);
+    return data
   }),
   setTaref: publicProcedure.input(z.object({stage: z.number(), cow_num: z.number()})).mutation(async({input}) =>{
     const {stage,cow_num} = input;
@@ -41,11 +42,17 @@ export const appRouter = router({
     const data = await setFinalStatusInDB(status,cow_num);
     return data
   }),
-  moveStage: publicProcedure.input(z.object({stage:z.number(), status: z.string(), cow_num: z.number(), image: z.string()})).mutation(async({input}) =>{
-    const {status ,cow_num, stage, image} = input;
+  moveStage: publicProcedure.input(z.object({stage:z.number(),  cow_num: z.number(), image: z.string()})).mutation(async({input}) =>{
+    const {cow_num, stage, image} = input;
     console.log(input);
     
-    const data = await moveStageDB(stage,cow_num,status,image );
+    const data = await moveStageDB(stage,cow_num,image );
+    return data
+  }),
+  getCowData: publicProcedure.input(z.number()).mutation(async({input}) =>{
+    console.log(input);
+    
+    const data = await getCowDataFromDB(input);
     return data
   })
 

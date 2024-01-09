@@ -17,12 +17,12 @@ export default function Stage1() {
   const handleSaveClick = async () => {
     const newCow = await trpc.addCow.mutate({
       status: selectedStatus,
-      cow_num:parseInt(numberInput),
-    })
+      cow_num: parseInt(numberInput),
+    });
     console.log(newCow);
-    
+    const newNumberInput = (parseInt(numberInput) + 1).toString();
+    setNumberInput(newNumberInput);
     setSelectedStatus('');
-    setNumberInput("")
   };
 
   return (
@@ -35,7 +35,7 @@ export default function Stage1() {
               className={`rounded-lg p-4 text-4xl mb-4 ${
                 selectedStatus === 't'
                   ? 'bg-red-200'
-                  : selectedStatus === 'k'
+                  : selectedStatus === 'k' || selectedStatus === 'kPlus'
                   ? 'bg-emerald-200'
                   : ''
               }`}
@@ -66,19 +66,23 @@ export default function Stage1() {
             </div>
 
             <div className="flex flex-row space-x-4">
+            <button
+          onClick={() => handleButtonClick('t')}
+          className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-red transition duration-300"
+        >
+           T
+        </button>
               <button
-                id="button-t"
-                onClick={() => handleButtonClick('t')}
-                className="border-solid border-2 bg-red-200 border-indigo-600 w-1/2 px-4 py-2"
-              >
-                T
-              </button>
-              <button
-                id="button-k"
                 onClick={() => handleButtonClick('k')}
-                className="border-solid border-2 bg-emerald-200 border-indigo-600 w-1/2 px-4 py-2"
+                className="bg-cyan-400	 hover:bg-cyan-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300"
               >
                 K
+              </button>
+              <button
+                onClick={() => handleButtonClick('kPlus')}
+                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300"
+              >
+                K+
               </button>
             </div>
           </div>

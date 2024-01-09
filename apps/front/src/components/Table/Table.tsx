@@ -3,15 +3,19 @@ type Props = {
     KosherNumbers: number[]
     setNum: React.Dispatch<React.SetStateAction<number>>
     selectedNumber: number
+    handlenumberClick?: (number: number) => void;
 
 }
 
 
-export default function Table({KosherNumbers ,selectedNumber, setNum}: Props)  {
+export default function Table({KosherNumbers ,selectedNumber, setNum, handlenumberClick }: Props)  {
 
 
   const handleNumberClick = (number: number) => {
     setNum(number);
+    if(handlenumberClick) {
+      handlenumberClick(number);
+    }
   };
 
   return (
