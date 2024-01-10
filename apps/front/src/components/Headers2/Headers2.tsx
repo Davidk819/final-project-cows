@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const navigation = [
   { name: 'stage1', href: '#', current: false },
@@ -20,6 +20,7 @@ export default function Headers2() {
     navigate(`/home/${path}`);
   };
   return (
+    <>
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
@@ -112,6 +113,7 @@ export default function Headers2() {
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
+                          // eslint-disable-next-line jsx-a11y/anchor-is-valid
                           <a
                             href="#"
                             className={classNames(
@@ -125,6 +127,7 @@ export default function Headers2() {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
+                          // eslint-disable-next-line jsx-a11y/anchor-is-valid
                           <a
                             href="#"
                             className={classNames(
@@ -138,6 +141,7 @@ export default function Headers2() {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
+                          // eslint-disable-next-line jsx-a11y/anchor-is-valid
                           <a
                             href="#"
                             className={classNames(
@@ -161,8 +165,8 @@ export default function Headers2() {
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
+                  onClick={() => handleClick(item.name)}
                   as="a"
-                  href={item.href}
                   className={classNames(
                     item.current
                       ? 'bg-gray-900 text-white'
@@ -177,7 +181,10 @@ export default function Headers2() {
             </div>
           </Disclosure.Panel>
         </>
-      )}
+      )} 
+      
     </Disclosure>
+    <Outlet/>
+    </>
   );
 }

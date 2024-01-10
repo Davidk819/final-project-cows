@@ -12,7 +12,6 @@ export default function Main() {
 
   return (
     <div>
-        <Headers2></Headers2>
       {/* <div className="flex justify-center	items-center	 gap-4 border-2">
         <button
           onClick={() => handleClick('stage1')}
