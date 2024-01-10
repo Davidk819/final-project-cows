@@ -6,3 +6,7 @@ export interface CowNumber {
   status: string;
   }
   
+  export  type LoadingProps = {
+    type: string
+    color : string
+  };

@@ -43,9 +43,6 @@ export default function Stage2() {
     setKosherList1(!KosherList1);
   };
   const handlSave = async () => {
-    // setTimeout(async () => {
-    //   if (imageUrl) console.log(imageUrl);
-    // }, 1000);
     if (selectedNumber !== 0) {
       await trpc.moveStage.mutate({
         cow_num: selectedNumber,
@@ -53,6 +50,7 @@ export default function Stage2() {
         image: imageUrl,
       });
       setKosherList1(!KosherList1);
+      setImageUrl('')
     }
   };
   const handlenumberClick = async (number: number) => {
@@ -110,7 +108,7 @@ export default function Stage2() {
           onClick={handlSave}
           className="bg-teal-400		 hover:bg-teal-600	 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300"
         >
-          next
+          Move to stage 3
         </button>
         <button
           onClick={handleSetT}
