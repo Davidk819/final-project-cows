@@ -35,6 +35,7 @@ export const insertNewCow = async (status: string, cawNum: number) => {
           cow_num: cawNum,
           status: status,
           stage: stage,
+          rea_img: ''
         },
         {
           fields: [
@@ -44,6 +45,7 @@ export const insertNewCow = async (status: string, cawNum: number) => {
             'cow_num',
             'status',
             'stage',
+            'rea_img'
           ],
         }
       );
@@ -190,7 +192,10 @@ export const getCowDataFromDB = async (cow_num: number) => {
     const data = await Cow.findOne({
       where: { cow_num: cow_num, enter_date: date() },
     });
-    return { img: data.dataValues.rea_img, status: data.dataValues.status };
+    if(data) {
+
+      return { img: data.dataValues.rea_img, status: data.dataValues.status };
+    }
   } catch (err) {
     console.log(err);
   }
