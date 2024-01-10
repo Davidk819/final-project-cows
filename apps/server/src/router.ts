@@ -25,11 +25,15 @@ export const appRouter = router({
     }),
   getAll: publicProcedure.query(async () => {
     const data = await getAll();
-    return data.map((cow) => ({ ...cow.dataValues }));
+    if(data) {
+      return data.map((cow) => ({ ...cow.dataValues }));
+    }
   }),
   getKosherNumbers: publicProcedure.query(async () => {
     const data = await getKosherNumbersFromDB();
-    return data.map((cow) => cow.dataValues.cow_num);
+    if(data) {
+      return data.map((cow) => cow.dataValues.cow_num);
+    }
   }),
   getAllByStage: publicProcedure.input(z.number()).query(async ({ input }) => {
     const stage = input;
