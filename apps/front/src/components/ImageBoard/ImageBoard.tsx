@@ -1,16 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import reaImage from '../Stage1/rea.png';
-import { useNavigate } from 'react-router-dom';
-import { atom, useAtom } from 'jotai';
-import { mooID, photoURL } from '../../mainAtom';
+import reaImage from '../Stage2/rea.png';
+// import CowCard from '../CawCard/CawCard';
 
-const ImageBoard = () => {
+type Props = {
+  setImageUrl: (str: string) => void;
+  handleSave: () => void;
+};
+
+const ImageBoard = ({ setImageUrl, handleSave }: Props) => {
   const canvasElement = useRef<HTMLCanvasElement | null>(null);
-  const navigate = useNavigate();
-  const [photo, setPhoto] = useAtom(photoURL);
-  const [signatureStart, setSignatureStart] = useState(false);
+  const [flag, setFlag] = useState(false);
+
 
   useEffect(() => {
+    console.log('ImageBoard component loaded');
     const image = new Image();
     image.src = reaImage;
 
@@ -23,9 +26,9 @@ const ImageBoard = () => {
         }
       }
     };
-  }, [reaImage, canvasElement]);
+  }, [flag]);
 
-  const getMousePosition = (event: MouseEvent) => {
+  const getMousePosition = (event: React.MouseEvent<HTMLCanvasElement>) => {
     const rect = canvasElement.current!.getBoundingClientRect();
     return {
       x: event.clientX - rect.left,
@@ -33,7 +36,10 @@ const ImageBoard = () => {
     };
   };
 
-  const markPointOnImage = (event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+  const markPointOnImage = (
+    event: React.MouseEvent<HTMLCanvasElement, MouseEvent>
+  ) => {
+    event.preventDefault(); // טיפול במניעת החיצונית במהלך לחיצה
     const pos = getMousePosition(event);
     const canvas = canvasElement.current;
     if (canvas) {
@@ -43,7 +49,6 @@ const ImageBoard = () => {
         context.beginPath();
         context.arc(pos.x, pos.y, 5, 0, 2 * Math.PI);
         context.fill();
-        setSignatureStart(true);
       }
     }
   };
@@ -54,19 +59,23 @@ const ImageBoard = () => {
       const context = canvas.getContext('2d');
       if (context) {
         context.clearRect(0, 0, canvas.width, canvas.height);
-        setSignatureStart(false);
       }
     }
   };
 
   const getPng = () => {
-    if (signatureStart) {
+    console.log('getPng called');
       const canvas = canvasElement.current;
       if (canvas) {
-        console.log(canvas.toDataURL());
-        setPhoto(canvas.toDataURL());
+        const imageUrl = canvas.toDataURL();
+        console.log('New image URL:', imageUrl);
+        setImageUrl(imageUrl);
+        clean2()
+        setFlag(!flag)
+
+       
       }
-    }
+  
   };
 
   const clean2 = () => {
@@ -82,29 +91,35 @@ const ImageBoard = () => {
     }
   };
 
+  // const handleSaveWrapper = () => {
+  //   getPng((result) => {
+  //     if (result) {
+  //       handleSave();
+  //       clean2();
+  //     }
+  //   });
+  // };
+
   return (
-    <div>
-      <div style={{ width: '400px', border: '1px solid black' }}>
+    <div className="flex items-center justify-center space-x-8">
+      <div className="border-2 border-black p-4">
+        {/* <CowCard ></CowCard> */}
         <canvas
-          style={{ cursor: 'crosshair', border: '1px solid black' }}
+          className="cursor-crosshair border border-black"
           width="400px"
           height="300px"
           ref={canvasElement}
           onClick={markPointOnImage}
         ></canvas>
-        <div>
-          <div style={{ cursor: 'pointer' }} onClick={getPng}>
-            Save to console
+        <div className="flex justify-between mt-4">
+          <div className="cursor-pointer" onClick={getPng}>
+            Save
           </div>
-          <div style={{ cursor: 'pointer' }} onClick={clean2}>
+          <div className="cursor-pointer" onClick={clean2}>
             Clean
           </div>
         </div>
       </div>
-      <button onClick={() => navigate(`/home/main`)} style={{ border: '2px solid indigo', width: '24px' }}>
-        Main
-      </button>
-      <h1>{photo}</h1>
     </div>
   );
 };

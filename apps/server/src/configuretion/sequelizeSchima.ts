@@ -1,17 +1,49 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import {  DataTypes } from 'sequelize';
 import { sequelize } from './postgresql';
-import { v4 as uuidv4 } from 'uuid';
+import {  Model } from 'sequelize';
+import { CowAttributesCreate, CowAttributesRead, DaySumAttributesCreate, DaySumAttributesRead } from '../assets/types';
+// import { CowAttributes } from '../typs';
 
 
-export const Name = sequelize.define('Name', {
-  name_name: { type: DataTypes.STRING, allowNull: true },
-  age: { type: DataTypes.INTEGER, allowNull: true },
-});
 
-export const Cow = sequelize.define(
-  'Cow',
+// interface CowInstance extends Model<CowAttributes>, CowAttributes {}
+
+
+export const DaySum = sequelize.define<Model<DaySumAttributesRead, DaySumAttributesCreate>>(
+  'day_sum',
   {
-    caw_id: {
+    date: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+    },
+    k_sum: {
+      type: DataTypes.INTEGER,
+    },
+    kPlus_sum: {
+      type: DataTypes.INTEGER,
+    },
+    t1: {
+      type: DataTypes.INTEGER,
+    },
+    t2: {
+      type: DataTypes.INTEGER,
+    },
+    t3: {
+      type: DataTypes.INTEGER,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+    },
+  }
+);
+
+export const Cow = sequelize.define<Model<CowAttributesRead, CowAttributesCreate>>(
+  'cow',
+  {
+    cow_id: {
       type: DataTypes.STRING,
       primaryKey: true,
     },
@@ -19,9 +51,9 @@ export const Cow = sequelize.define(
       type: DataTypes.DATEONLY,
     },
     enter_time: {
-      type: DataTypes.TIME,
+      type: DataTypes.STRING,
     },
-    caw_num: {
+    cow_num: {
       type: DataTypes.INTEGER,
     },
     status: {
@@ -30,10 +62,34 @@ export const Cow = sequelize.define(
     },
     stage: {
       type: DataTypes.INTEGER,
-      defaultValue: 1,
+    },
+    rea_img: {
+      type: DataTypes.TEXT,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
     },
   },
-  {
-    // Other model options go here
-  }
 );
+
+
+
+
+
+
+  export const createTable = async ()=>{
+    try {
+      await DaySum.sync()
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  export const Name = sequelize.define('Name', {
+    name_name: { type: DataTypes.STRING, allowNull: true },
+    age: { type: DataTypes.INTEGER, allowNull: true },
+  });
