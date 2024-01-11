@@ -64,7 +64,7 @@ export default function Stage3() {
 
   return (
     <div>
-      <Headers2></Headers2>
+ 
       <Table
         selectedNumber={selectedNumber}
         KosherNumbers={list}

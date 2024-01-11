@@ -7,7 +7,7 @@ import type { AppRouter } from '../../server/src/router';
 export const trpc = createTRPCProxyClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: 'http://localhost:3000',
+      url: 'https://cow-service.onrender.com',
     }),
   ],
 });

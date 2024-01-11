@@ -66,7 +66,7 @@ export default function Stage2() {
   };
   return (
     <div>
-      <Headers2></Headers2>
+
       {imageUrl}
       <div className="w-full max-w-md">
         <label

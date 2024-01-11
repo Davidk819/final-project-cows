@@ -24,7 +24,6 @@ export default function HomePage() {
 
   return (
     <>
-      <Headers2></Headers2>
       <div className=" flex flex-col">
         <div className="flex-1 flex flex-wrap justify-center ">
           {/* {data.map((num) => (
