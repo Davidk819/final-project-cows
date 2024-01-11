@@ -1,7 +1,7 @@
 import { useAtom, useAtomValue } from 'jotai';
 import '../../styles.css';
 import { Link, useNavigate } from 'react-router-dom';
-import Headers2 from '../Headers2/Headers2';
+import Headers2 from '../Headers/Headers';
 
 export default function Main() {
   const navigate = useNavigate();

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import ImageBoard from '../ImageBoard/ImageBoard';
-import Headers2 from '../Headers2/Headers2';
 import Table from '../Table/Table';
 import { trpc } from '../../trpcClient';
 // import { CowNumber } from '../typs';
@@ -32,15 +31,31 @@ export default function Stage2() {
   };
 
   const handleSetT = async () => {
-    await trpc.setTaref.mutate({ stage: 2, cow_num: selectedNumber });
-    setKosherList1(!KosherList1);
+    if (selectedNumber) {
+      await trpc.setTaref.mutate({ stage: 2, cow_num: selectedNumber });
+      setKosherList1(!KosherList1);
+      setSelectedNumber(0);
+    }
   };
   const handleKPllus = async () => {
-    await trpc.setFinalStatus.mutate({
-      status: 'kPlus',
-      cow_num: selectedNumber,
-    });
-    setKosherList1(!KosherList1);
+    if (selectedNumber) {
+      await trpc.setFinalStatus.mutate({
+        status: 'kPlus',
+        cow_num: selectedNumber,
+      });
+      setKosherList1(!KosherList1);
+      setSelectedNumber(0);
+    }
+  };
+  const handleK = async () => {
+    if (selectedNumber) {
+      await trpc.setFinalStatus.mutate({
+        status: 'k',
+        cow_num: selectedNumber,
+      });
+      setKosherList1(!KosherList1);
+      setSelectedNumber(0);
+    }
   };
   const handlSave = async () => {
     if (selectedNumber !== 0) {
@@ -50,7 +65,8 @@ export default function Stage2() {
         image: imageUrl,
       });
       setKosherList1(!KosherList1);
-      setImageUrl('')
+      setImageUrl('');
+      setSelectedNumber(0);
     }
   };
   const handlenumberClick = async (number: number) => {
@@ -66,8 +82,6 @@ export default function Stage2() {
   };
   return (
     <div>
-
-      {imageUrl}
       <div className="w-full max-w-md">
         <label
           htmlFor="number"
@@ -84,19 +98,18 @@ export default function Stage2() {
           className="w-1/2 sm:w-full rounded-md border py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 mt-2 mb-4"
         />
       </div>
-      <div className="flex space-x-4">
-        <div></div>
-      </div>
       <Table
         selectedNumber={selectedNumber}
         KosherNumbers={KosherList}
         setNum={setSelectedNumber}
         handlenumberClick={handlenumberClick}
       ></Table>
-      <ImageBoard
-        handleSave={handlSave}
-        setImageUrl={setImageUrl}
-      ></ImageBoard>
+      {selectedNumber !== 0 && (
+        <ImageBoard
+          handleSave={handlSave}
+          setImageUrl={setImageUrl}
+        ></ImageBoard>
+      )}
       <div className="flex justify-center items-center mt-4 space-x-4">
         <button
           onClick={handleSetT}
@@ -111,7 +124,7 @@ export default function Stage2() {
           Move to stage 3
         </button>
         <button
-          onClick={handleSetT}
+          onClick={handleK}
           className="bg-cyan-400	 hover:bg-cyan-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300"
         >
           K
