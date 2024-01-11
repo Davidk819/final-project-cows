@@ -1,5 +1,4 @@
 import '../../styles.css';
-import Headers2 from '../Headers2/Headers2';
 import { useEffect, useState } from 'react';
 import { trpc } from '../../trpcClient';
 import Table from '../Table/Table';
@@ -64,7 +63,7 @@ export default function Stage3() {
 
   return (
     <div>
-      <Headers2></Headers2>
+ 
       <Table
         selectedNumber={selectedNumber}
         KosherNumbers={list}

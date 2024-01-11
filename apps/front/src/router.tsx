@@ -9,6 +9,7 @@ import Stage1 from './components/Stage1/Stage1';
 import Stage2 from './components/Stage2/Stage2';
 import Stage3 from './components/Stage3/Stage3';
 import HomePage from './components/HomePage/HomePage';
+import Headers2 from './components/Headers/Headers';
 
 export const router = createBrowserRouter([
   {
@@ -16,33 +17,39 @@ export const router = createBrowserRouter([
     element: <Navi />,
   },
   {
-    path: '/home',
-    element: <HomePage />,
+    path: '/',
+    element: <Headers2/>,
+    children: [
+      {
+        path: '/home',
+        element: <HomePage />,
+      },
+      {
+        path: '/home/SignIn',
+        element: <SignIn />,
+      },
+      {
+        path: '/home/SignUp',
+        element: <SignUp />,
+      },
+      {
+        path: '/home/main',
+        element: <Main />,
+      },
+      {
+        path: '/home/stage1',
+        element: <Stage1 />,
+      },
+      {
+        path: '/home/stage2',
+        element: <Stage2 />,
+      },
+      {
+        path: '/home/stage3',
+        element: <Stage3 />,
+      },
 
-  },
-  {
-    path: '/home/SignIn',
-    element: <SignIn />,
-  },
-  {
-    path: '/home/SignUp',
-    element: <SignUp />,
-  },
-  {
-    path: '/home/main',
-    element: <Main />,
-  },
-  {
-    path: '/home/stage1',
-    element: <Stage1 />,
-  },
-  {
-    path: '/home/stage2',
-    element: <Stage2 />,
-  },
-  {
-    path: '/home/stage3',
-    element: <Stage3 />,
+    ]
   },
 
 ]);

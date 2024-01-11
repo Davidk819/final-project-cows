@@ -1,13 +1,14 @@
 import {
   getAll,
   getCowDataFromDB,
+  getDayDataFromDB,
   getKosherNumbersFromDB,
   getNumbersByStageFromDB,
   insertNewCow,
   moveStageDB,
   setFinalStatusInDB,
   setTarefInDB,
-} from './dall/dall';
+} from './dal/dal';
 import { publicProcedure, router } from './trpc';
 import { z } from 'zod';
 
@@ -60,16 +61,18 @@ export const appRouter = router({
     )
     .mutation(async ({ input }) => {
       const { cow_num, stage, image } = input;
-      console.log(input);
-
       const data = await moveStageDB(stage, cow_num, image);
       return data;
     }),
   getCowData: publicProcedure.input(z.number()).mutation(async ({ input }) => {
-    console.log(input);
-
     const data = await getCowDataFromDB(input);
     return data;
+  }),
+  getDayData: publicProcedure.input(z.string()).query(async ({ input }) => {
+    const data = await getDayDataFromDB(input);
+    if(data) {
+      return data;
+    }
   }),
 });
 
