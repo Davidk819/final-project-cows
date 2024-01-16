@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
+
 import { Navi } from './components/Navigate';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';

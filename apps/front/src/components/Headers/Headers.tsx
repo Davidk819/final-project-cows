@@ -1,7 +1,9 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { useAtom, useAtomValue } from 'jotai';
+import { Email } from '../../mainAtom';
 
 const navigation = [
   { name: 'stage1', href: '#', current: false },
@@ -15,9 +17,17 @@ function classNames(...classes: string[]) {
 
 export default function Headers2() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('')
+
+
 
   const handleClick = (path: string) => {
     navigate(`/home/${path}`);
+  };
+  const handleLogOut = () => {
+    localStorage.setItem('token', '');
+    localStorage.setItem('email', '');
+    setEmail('')
   };
   return (
     <>
@@ -81,13 +91,14 @@ export default function Headers2() {
                   <Menu as="div" className="relative ml-3">
                     <div>
                       <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <span className="absolute -inset-1.5" />
+                      <span className="absolute -inset-3 "></span>
                         <span className="sr-only">Open user menu</span>
-                        <img
+                        <p className='text-amber-50 bg-slate-300 rounded-full'>{email}</p>
+                        {/* <img
                           className="h-8 w-8 rounded-full"
                           src="://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                           alt=""
-                        />
+                        /> */}
                       </Menu.Button>
                     </div>
                     <Transition
@@ -115,9 +126,10 @@ export default function Headers2() {
                           )}
                         </Menu.Item>
                         <Menu.Item>
-                          {({ active }) => (
+                          { ({ active }) => (
                             <button
                               type="button"
+                              onClick={handleLogOut}
                               // onClick={() => handleClick("Signout")}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
@@ -162,3 +174,7 @@ export default function Headers2() {
     </>
   );
 }
+function useuseAtomValue(email: string) {
+  throw new Error('Function not implemented.');
+}
+
