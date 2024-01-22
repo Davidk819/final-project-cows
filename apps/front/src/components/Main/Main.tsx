@@ -1,14 +1,12 @@
-import { useAtom, useAtomValue } from 'jotai';
 import '../../styles.css';
-import { Link, useNavigate } from 'react-router-dom';
-import Headers2 from '../Headers/Headers';
+// import {  useNavigate } from 'react-router-dom';
 
 export default function Main() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleClick = (path: string) => {
-    navigate(`/home/${path}`);
-  };
+  // const handleClick = (path: string) => {
+  //   navigate(`/home/${path}`);
+  // };
 
   return (
     <div>

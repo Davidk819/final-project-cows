@@ -24,15 +24,16 @@ export const appRouter = router({
         return { res_status: 401, massege: 'Error' };
       }
     }),
-  getAll: publicProcedure.query(async () => {
+
+  getAll: publicProcedure.query(async ( ) => {
     const data = await getAll();
-    if(data) {
+    if (data) {
       return data.map((cow) => ({ ...cow.dataValues }));
     }
   }),
   getKosherNumbers: publicProcedure.query(async () => {
     const data = await getKosherNumbersFromDB();
-    if(data) {
+    if (data) {
       return data.map((cow) => cow.dataValues.cow_num);
     }
   }),
@@ -70,7 +71,7 @@ export const appRouter = router({
   }),
   getDayData: publicProcedure.input(z.string()).query(async ({ input }) => {
     const data = await getDayDataFromDB(input);
-    if(data) {
+    if (data) {
       return data;
     }
   }),

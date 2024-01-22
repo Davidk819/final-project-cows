@@ -1,9 +1,9 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useAtom, useAtomValue } from 'jotai';
-import { Email } from '../../mainAtom';
+import { useAtom } from 'jotai';
+import { Login } from '../../mainAtom';
 
 const navigation = [
   { name: 'stage1', href: '#', current: false },
@@ -17,18 +17,35 @@ function classNames(...classes: string[]) {
 
 export default function Headers2() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [email, setEmail] = useState('');
+  const [Login1, setLogin1] = useAtom(Login);
 
-
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('email');
+    if (storedEmail) {
+      setEmail(storedEmail);
+    }
+  }, [Login1]);
 
   const handleClick = (path: string) => {
     navigate(`/home/${path}`);
   };
+
+  const handleLogIn = () => {
+    const storedToken = localStorage.getItem('token');
+    if (!storedToken) {
+      navigate(`/home/SignIn`);
+    }
+  };
+
   const handleLogOut = () => {
     localStorage.setItem('token', '');
     localStorage.setItem('email', '');
-    setEmail('')
+    setEmail('');
+    setLogin1(false);
   };
+
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
@@ -84,21 +101,13 @@ export default function Headers2() {
                   >
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>
-                      <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="absolute -inset-3 "></span>
-                        <span className="sr-only">Open user menu</span>
-                        <p className='text-amber-50 bg-slate-300 rounded-full'>{email}</p>
-                        {/* <img
-                          className="h-8 w-8 rounded-full"
-                          src="://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        /> */}
+                      <Menu.Button className=" relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span className="bg-gray-300 absolute rounded-full -inset-3 "></span>
                       </Menu.Button>
                     </div>
                     <Transition
@@ -111,35 +120,38 @@ export default function Headers2() {
                       leaveTo="transform opacity-0 scale-95"
                     >
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              type="button"
-                              onClick={() => handleClick("SignIn")}
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
-                            >
-                              Sign In
-                            </button>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          { ({ active }) => (
-                            <button
-                              type="button"
-                              onClick={handleLogOut}
-                              // onClick={() => handleClick("Signout")}
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
-                            >
-                              Sign out
-                            </button>
-                          )}
-                        </Menu.Item>
+                        
+                          <Menu.Item>
+                            {({ active }) => (
+                              <button
+                                type="button"
+                                onClick={handleLogIn}
+                                className={classNames(
+                                  active ? 'bg-gray-100' : '',
+                                  'block px-4 py-2 text-sm text-gray-700'
+                                )}
+                              >
+                                Sign In
+                              </button>
+                            )}
+                          </Menu.Item>
+                        
+                        
+                          <Menu.Item>
+                            {({ active }) => (
+                              <button
+                                type="button"
+                                onClick={handleLogOut}
+                                className={classNames(
+                                  active ? 'bg-gray-100' : '',
+                                  'block px-4 py-2 text-sm text-gray-700'
+                                )}
+                              >
+                                Sign out
+                              </button>
+                            )}
+                          </Menu.Item>
+                      
                       </Menu.Items>
                     </Transition>
                   </Menu>
@@ -174,7 +186,3 @@ export default function Headers2() {
     </>
   );
 }
-function useuseAtomValue(email: string) {
-  throw new Error('Function not implemented.');
-}
-

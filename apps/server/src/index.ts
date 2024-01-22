@@ -3,16 +3,18 @@ import {sequelizeConnection } from './configuretion/postgresql';
 import { appRouter } from './router';
 import cors from 'cors';
 import dotenv from 'dotenv'
+import { createContext } from './context';
 // import { createTable } from './configuretion/sequelizeSchima';
 
 dotenv.config();
 
-const PORT = process.env.PORT as unknown as number || 3000
+const PORT = process.env.PORT_SERVER as unknown as number || 3000
 
 
 const server = createHTTPServer({
   router: appRouter,
-  middleware: cors()
+  middleware: cors(),
+  createContext: createContext
 });
 const start = async () => {
   await sequelizeConnection();

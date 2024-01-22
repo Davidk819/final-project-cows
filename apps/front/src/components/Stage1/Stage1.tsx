@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { trpc } from '../../trpcClient';
+import { trpc, trpc2 } from '../../trpcClient';
 
 export default function Stage1() {
   const [numberInput, setNumberInput] = useState<string>('');
@@ -22,12 +22,15 @@ export default function Stage1() {
     }
   };
 
+
+
   const handleSaveClick = async () => {
     if(selectedStatus) {
     setIsLoading(true)
     const newCow = await trpc.addCow.mutate({
       status: selectedStatus,
       cow_num: parseInt(numberInput),
+      
     });
     console.log(newCow.res_status);
     setNoteStatus(newCow.res_status)

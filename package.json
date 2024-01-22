@@ -17,6 +17,7 @@
     "@mui/material": "^5.15.4",
     "@swc/helpers": "~0.5.2",
     "@trpc/client": "^10.45.0",
+    "@trpc/next": "^10.45.0",
     "@trpc/react-query": "^10.45.0",
     "@trpc/server": "^10.45.0",
     "@types/cors": "^2.8.17",
