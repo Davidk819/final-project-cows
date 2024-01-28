@@ -1,3 +1,4 @@
+import { TRPCError } from '@trpc/server';
 import {
   getAll,
   getCowDataFromDB,
@@ -11,6 +12,7 @@ import {
 } from './dal/dal';
 import { publicProcedure, router } from './trpc';
 import { z } from 'zod';
+import { BaseError as sequelizeError } from 'sequelize';
 
 export const appRouter = router({
   addCow: publicProcedure
@@ -25,7 +27,7 @@ export const appRouter = router({
       }
     }),
 
-  getAll: publicProcedure.query(async ( ) => {
+  getAll: publicProcedure.query(async () => {
     const data = await getAll();
     if (data) {
       return data.map((cow) => ({ ...cow.dataValues }));

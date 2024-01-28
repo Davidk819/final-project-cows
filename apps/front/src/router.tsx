@@ -2,7 +2,7 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 
-import { Navi } from './components/Navigate';
+// import { Navi } from './components/Navigate';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
 import Main from './components/Main/Main';
@@ -15,38 +15,34 @@ import Headers2 from './components/Headers/Headers';
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navi />,
-  },
-  {
-    path: '/',
     element: <Headers2/>,
     children: [
       {
-        path: '/home',
+        path: '/',
         element: <HomePage />,
       },
       {
-        path: '/home/SignIn',
+        path: '/SignIn',
         element: <SignIn />,
       },
       {
-        path: '/home/SignUp',
+        path: '/SignUp',
         element: <SignUp />,
       },
       {
-        path: '/home/main',
+        path: '/main',
         element: <Main />,
       },
       {
-        path: '/home/stage1',
+        path: '/stage1',
         element: <Stage1 />,
       },
       {
-        path: '/home/stage2',
+        path: '/stage2',
         element: <Stage2 />,
       },
       {
-        path: '/home/stage3',
+        path: '/stage3',
         element: <Stage3 />,
       },
 

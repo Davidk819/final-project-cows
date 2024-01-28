@@ -64,6 +64,7 @@ export const insertNewCow = async (status: string, cawNum: number) => {
 export const getAll = async () => {
   try {
     const data = await Cow.findAll();
+    
     return data;
   } catch (err) {
     console.log(err);

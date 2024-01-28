@@ -17,7 +17,6 @@ function classNames(...classes: string[]) {
 
 export default function Headers2() {
   const navigate = useNavigate();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [email, setEmail] = useState('');
   const [Login1, setLogin1] = useAtom(Login);
 
@@ -29,13 +28,13 @@ export default function Headers2() {
   }, [Login1]);
 
   const handleClick = (path: string) => {
-    navigate(`/home/${path}`);
+    navigate(`/${path}`);
   };
 
   const handleLogIn = () => {
     const storedToken = localStorage.getItem('token');
     if (!storedToken) {
-      navigate(`/home/SignIn`);
+      navigate(`/SignIn`);
     }
   };
 

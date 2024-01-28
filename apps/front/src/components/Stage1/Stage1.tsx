@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { trpc, trpc2 } from '../../trpcClient';
+import { trpc } from '../../trpcClient';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks'
+import { setTaref } from '../../redux/cowSlice';
+import CircularProgress from '@mui/material/CircularProgress';
+import LinearProgress from '@mui/material/LinearProgress';
+
 
 export default function Stage1() {
   const [numberInput, setNumberInput] = useState<string>('');
@@ -7,6 +12,10 @@ export default function Stage1() {
   const [isLoading, setIsLoading] = useState(false);
   const [note, setNote] = useState<string>('');
   const [noteStatus, setNoteStatus] = useState<number>(0);
+
+  const cows = useAppSelector(state => state.cows)
+  const dispatch = useAppDispatch()
+
 
 
 
@@ -39,9 +48,12 @@ export default function Stage1() {
     setNumberInput(newNumberInput);
     setSelectedStatus('');
     setIsLoading(false)
+    dispatch(setTaref({ num: 1, newStatus: 'fff' }));
+    console.log(cows)
+
   };
 }
-if(isLoading) return <div>Loading...</div>
+if(isLoading) return <LinearProgress />
 
   return (
     <div>

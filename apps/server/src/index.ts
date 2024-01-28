@@ -2,13 +2,12 @@ import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import {sequelizeConnection } from './configuretion/postgresql';
 import { appRouter } from './router';
 import cors from 'cors';
-import dotenv from 'dotenv'
+import 'dotenv/config';
 import { createContext } from './context';
 // import { createTable } from './configuretion/sequelizeSchima';
 
-dotenv.config();
 
-const PORT = process.env.PORT_SERVER as unknown as number || 3000
+const PORT = +(process.env.PORT_SERVER) || 3008
 
 
 const server = createHTTPServer({

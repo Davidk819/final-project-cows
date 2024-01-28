@@ -13,6 +13,7 @@ export const createContext = async (opts: CreateNextContextOptions) => {
     return null;
   }
   const user = await getUserFromHeader();
+  
   return {
     user,
   };
