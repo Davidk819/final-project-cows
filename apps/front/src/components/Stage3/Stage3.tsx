@@ -14,8 +14,7 @@ export default function Stage3() {
     try {
       const newData = await trpc.getAllByStage.query(3);
       console.log(newData);
-      if(newData)
-      setList(newData);
+      if (newData) setList(newData);
     } catch (err) {
       console.log(err);
     }
@@ -31,7 +30,6 @@ export default function Stage3() {
         setImageUrl(data.img);
         setStatus(data.status);
         console.log(data.status);
-        
       } else {
         setImageUrl('');
       }
@@ -63,37 +61,37 @@ export default function Stage3() {
 
   return (
     <div>
- 
-      <Table
+      <Table 
         selectedNumber={selectedNumber}
         KosherNumbers={list}
         setNum={setSelectedNumber}
         handlenumberClick={handlenumberClick}
       ></Table>
 
-      <div className="flex justify-center items-center gap-4 border-2">
-        stage2
-      </div>
-      {imageUrl && <img src={imageUrl} alt="תמונה" />}
+      {imageUrl && (
+        <div className="border flex flex-col items-center">
+          <img src={imageUrl} alt="תמונה" />
+        </div>
+      )}
       <div className="flex justify-center items-center mt-4 space-x-4">
         <button
           onClick={handleSetT}
           className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-red transition duration-300"
         >
-          T
+          טרף
         </button>
         <button
           onClick={handleK}
           className="bg-cyan-400	 hover:bg-cyan-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300"
         >
-          K
+          כשר
         </button>
         {status === 'kPlus' && (
           <button
             onClick={handleKPllus}
             className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300"
           >
-            K+
+            חלק
           </button>
         )}
       </div>

@@ -20,7 +20,7 @@ export default function Table({KosherNumbers ,selectedNumber, setNum, handlenumb
 
   return (
     <>
-    <div className="grid grid-cols-5 gap-1">
+    <div className="grid grid-cols-5 gap-1 mt-3">
       {KosherNumbers.map((number) => (
         <div
           key={number}
@@ -40,7 +40,7 @@ export default function Table({KosherNumbers ,selectedNumber, setNum, handlenumb
 
     </div>
       {selectedNumber !== null && (
-        <div className="mt-4 border p-1 bg-blue-100 text-center"> Number  {selectedNumber}</div>
+        <div className="mt-4 border p-1 bg-blue-100 text-center">  בהמה מספר :    {selectedNumber}</div>
       )}
     </>
   );

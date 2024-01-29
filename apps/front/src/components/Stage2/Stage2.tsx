@@ -10,7 +10,7 @@ export default function Stage2() {
   const [selectedNumber, setSelectedNumber] = useState(0);
   const [KosherList, setKosherList] = useState<number[]>([]);
   const [, setImageUrl] = useState('');
-  const [,setStatus] = useState('');
+  const [, setStatus] = useState('');
 
   const fetchData = async () => {
     try {
@@ -60,13 +60,8 @@ export default function Stage2() {
   return (
     <div>
       <div className="w-full max-w-md">
-        <label
-          htmlFor="number"
-          className="block text-sm font-medium leading-6 text-gray-900"
-        >
-          Number
-        </label>
         <input
+          placeholder="  הכנס מספר בהמה "
           type="number"
           name="number"
           id="number"
@@ -81,26 +76,14 @@ export default function Stage2() {
         setNum={setSelectedNumber}
         handlenumberClick={handleNumberClick}
       ></Table>
-      {selectedNumber !== 0 && (
-        <ImageBoard
-          handleSave={handlSave}
-        ></ImageBoard>
-      )}
+      {selectedNumber !== 0 && <ImageBoard handleSave={handlSave}></ImageBoard>}
       <div className="flex justify-center items-center mt-4 space-x-4">
         <button
           onClick={handleSetT}
           className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-red transition duration-300"
         >
-          T
+          טרף
         </button>
-        {/* <button
-          onClick={handlSave}
-          className="bg-teal-400		 hover:bg-teal-600	 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300"
-        >
-          Move to stage 3
-        </button> */}
-
-
       </div>
     </div>
   );

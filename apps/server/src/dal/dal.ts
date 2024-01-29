@@ -14,7 +14,7 @@ export const insertNewCow = async (status: string, cawNum: number) => {
     if (existingCow) {
       return {
         res_status: 400,
-        massege: `cow ${cawNum} already exist`,
+        massege: `בהמה מספר ${cawNum} כבר קיימת במערכת`,
       };
     } else {
       await Cow.sync();
@@ -52,7 +52,7 @@ export const insertNewCow = async (status: string, cawNum: number) => {
       if (newCow) {
         return {
           res_status: 200,
-          massege: `cow ${cawNum} updated in the system`,
+          massege: `בהמה מס' ${cawNum} עודכנה בהצלחה`,
         };
       }
     }
