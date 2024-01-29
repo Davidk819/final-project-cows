@@ -41,9 +41,9 @@ export default function HomePage() {
   };
 
 
-
+  // flex flex-col items-center  bg-gray-100 min-h-11
   return (
-    <div className="flex flex-col items-center justify-center h-screen space-y-4">
+    <div className="flex flex-col items-center justify-center  space-y-4">
       <p className="text-2xl ...">מידע יומי</p>
       {isLoading ? <CircularProgress/> : 
       <div className="bg-gray-100 p-8 rounded-md shadow-md">
@@ -66,9 +66,16 @@ export default function HomePage() {
         className="bg-cyan-400 hover:bg-cyan-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300"
       >
         Get Data
-      </button>
-
-      <table className="min-w-full bg-white border border-gray-300 rounded-md">
+      </button >
+      {data && 
+      <div>
+            סה"כ   :
+        {data.t1 + data.t2 + data.t3 + data.k_sum + data.kPlus_sum}
+      </div>
+         }
+      <div className='max-w-10'>
+        
+      <table className=" bg-white border border-gray-300 ">
         <thead>
           <tr>
             <th className="py-2 px-4 border">תאריך</th>
@@ -77,7 +84,6 @@ export default function HomePage() {
             <th className="py-2 px-4 border">טרף שחיטה</th>
             <th className="py-2 px-4 border">טרף פנים</th>
             <th className="py-2 px-4 border">טרף חוץ</th>
-            <th className="py-2 px-4 border"> סהכ</th>
 
           </tr>
         </thead>
@@ -90,11 +96,13 @@ export default function HomePage() {
               <td className="py-2 px-4 border ">{data.t1}</td>
               <td className="py-2 px-4 border">{data.t2}</td>
               <td className="py-2 px-4 border">{data.t3}</td>
-              <td className="py-2 px-4 border">{data.t1 + data.t2 + data.t3 + data.k_sum + data.kPlus_sum }</td>
             </tr>
           }
         </tbody>
       </table>
+
+      </div>
+
     </div>
   );
 }
