@@ -9,21 +9,21 @@ export default function Stage2() {
   const [numberInput, setNumberInput] = useState<string>('');
   const [selectedNumber, setSelectedNumber] = useState(0);
   const [KosherList, setKosherList] = useState<number[]>([]);
-  const [KosherList1, setKosherList1] = useState(true);
   const [imageUrl, setImageUrl] = useState<string>('');
   const [status, setStatus] = useState<string>('');
 
+
+  const fetchData = async () => {
+    try {
+      const newData = await trpc.getAllByStage.query(2);
+      if (newData) setKosherList(newData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const newData = await trpc.getAllByStage.query(2);
-        if (newData) setKosherList(newData);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fetchData();
-  }, [KosherList1]);
+  }, [KosherList]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNumberInput(event.target.value);
@@ -33,7 +33,6 @@ export default function Stage2() {
   const handleSetT = async () => {
     if (selectedNumber) {
       await trpc.setTaref.mutate({ stage: 2, cow_num: selectedNumber });
-      setKosherList1(!KosherList1);
       setSelectedNumber(0);
     }
   };
@@ -43,7 +42,6 @@ export default function Stage2() {
         status: 'kPlus',
         cow_num: selectedNumber,
       });
-      setKosherList1(!KosherList1);
       setSelectedNumber(0);
     }
   };
@@ -53,7 +51,6 @@ export default function Stage2() {
         status: 'k',
         cow_num: selectedNumber,
       });
-      setKosherList1(!KosherList1);
       setSelectedNumber(0);
     }
   };
@@ -64,7 +61,6 @@ export default function Stage2() {
         stage: 3,
         image: imageUrl,
       });
-      setKosherList1(!KosherList1);
       setImageUrl('');
       setSelectedNumber(0);
     }
