@@ -43,9 +43,9 @@ if(isLoading) return <LinearProgress/>
 
   return (
     <div>
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <div className="flex flex-col items-center  bg-gray-100 min-h-11">
         <div className={noteStatus === 200 ? 'bg-cyan-400 py-2 px-4 rounded' : "bg-red-200 rounded py-2 "}>{note}</div>
-        <div className="mt-8 p-8 bg-white rounded-md shadow-md w-full max-w-2xl">
+        <div className="mt-8 mb-11 p-8 bg-white rounded-md shadow-md w-full max-w-2xl">
           <div className="flex flex-col items-center mb-4">
             
             <div

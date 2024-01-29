@@ -10,19 +10,19 @@ export default function Stage3() {
   const [KosherList1, setKosherList1] = useState(true);
   const [status, setStatus] = useState<string>('');
 
+  const fetchData = async () => {
+    try {
+      const newData = await trpc.getAllByStage.query(3);
+      console.log(newData);
+      if(newData)
+      setList(newData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const newData = await trpc.getAllByStage.query(3);
-        console.log(newData);
-        if(newData)
-        setList(newData);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fetchData();
-  }, [KosherList1]);
+  }, [list]);
 
   const handlenumberClick = async (number: number) => {
     try {

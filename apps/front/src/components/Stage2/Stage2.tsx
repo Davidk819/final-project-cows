@@ -9,7 +9,7 @@ export default function Stage2() {
   const [numberInput, setNumberInput] = useState('');
   const [selectedNumber, setSelectedNumber] = useState(0);
   const [KosherList, setKosherList] = useState<number[]>([]);
-  const [imageUrl, setImageUrl] = useState('');
+  const [, setImageUrl] = useState('');
   const [,setStatus] = useState('');
 
   const fetchData = async () => {
