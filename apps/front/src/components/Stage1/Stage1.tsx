@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { trpc } from '../../trpcClient';
+import LinearProgress from '@mui/material/LinearProgress';
 
 export default function Stage1() {
   const [numberInput, setNumberInput] = useState<string>('');
@@ -38,7 +39,7 @@ export default function Stage1() {
     setIsLoading(false)
   };
 }
-if(isLoading) return <div>Loading...</div>
+if(isLoading) return <LinearProgress/>
 
   return (
     <div>
