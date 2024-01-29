@@ -3,17 +3,16 @@ import reaImage from '../Stage2/rea.png';
 // import CowCard from '../CawCard/CawCard';
 
 type Props = {
-  setImageUrl: (str: string) => void;
-  handleSave: () => void;
+
+  handleSave: (str: string) => void;
 };
 
-const ImageBoard = ({ setImageUrl, handleSave }: Props) => {
+const ImageBoard = ({ handleSave }: Props) => {
   const canvasElement = useRef<HTMLCanvasElement | null>(null);
   const [flag, setFlag] = useState(false);
 
 
   useEffect(() => {
-    console.log('ImageBoard component loaded');
     const image = new Image();
     image.src = reaImage;
 
@@ -39,7 +38,7 @@ const ImageBoard = ({ setImageUrl, handleSave }: Props) => {
   const markPointOnImage = (
     event: React.MouseEvent<HTMLCanvasElement, MouseEvent>
   ) => {
-    event.preventDefault(); // טיפול במניעת החיצונית במהלך לחיצה
+    event.preventDefault();
     const pos = getMousePosition(event);
     const canvas = canvasElement.current;
     if (canvas) {
@@ -64,16 +63,12 @@ const ImageBoard = ({ setImageUrl, handleSave }: Props) => {
   };
 
   const getPng = () => {
-    console.log('getPng called');
       const canvas = canvasElement.current;
       if (canvas) {
         const imageUrl = canvas.toDataURL();
-        console.log('New image URL:', imageUrl);
-        setImageUrl(imageUrl);
+        handleSave(imageUrl)
         clean2()
         setFlag(!flag)
-
-       
       }
   
   };
@@ -91,14 +86,7 @@ const ImageBoard = ({ setImageUrl, handleSave }: Props) => {
     }
   };
 
-  // const handleSaveWrapper = () => {
-  //   getPng((result) => {
-  //     if (result) {
-  //       handleSave();
-  //       clean2();
-  //     }
-  //   });
-  // };
+
 
   return (
     <div className="flex items-center justify-center space-x-8">

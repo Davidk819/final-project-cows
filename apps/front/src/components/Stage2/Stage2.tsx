@@ -36,12 +36,12 @@ export default function Stage2() {
     }
   };
 
-  const handlSave = async () => {
+  const handlSave = async (str: string) => {
     if (selectedNumber !== 0) {
       await trpc.moveStage.mutate({
         cow_num: selectedNumber,
         stage: 3,
-        image: imageUrl,
+        image: str,
       });
       setImageUrl('');
       setSelectedNumber(0);
@@ -84,7 +84,6 @@ export default function Stage2() {
       {selectedNumber !== 0 && (
         <ImageBoard
           handleSave={handlSave}
-          setImageUrl={setImageUrl}
         ></ImageBoard>
       )}
       <div className="flex justify-center items-center mt-4 space-x-4">
@@ -94,12 +93,12 @@ export default function Stage2() {
         >
           T
         </button>
-        <button
+        {/* <button
           onClick={handlSave}
           className="bg-teal-400		 hover:bg-teal-600	 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300"
         >
           Move to stage 3
-        </button>
+        </button> */}
 
 
       </div>
