@@ -6,12 +6,11 @@ import { trpc } from '../../trpcClient';
 // import { CowNumber } from '../typs';
 
 export default function Stage2() {
-  const [numberInput, setNumberInput] = useState<string>('');
+  const [numberInput, setNumberInput] = useState('');
   const [selectedNumber, setSelectedNumber] = useState(0);
   const [KosherList, setKosherList] = useState<number[]>([]);
-  const [imageUrl, setImageUrl] = useState<string>('');
-  const [status, setStatus] = useState<string>('');
-
+  const [imageUrl, setImageUrl] = useState('');
+  const [,setStatus] = useState('');
 
   const fetchData = async () => {
     try {
@@ -36,24 +35,7 @@ export default function Stage2() {
       setSelectedNumber(0);
     }
   };
-  const handleKPllus = async () => {
-    if (selectedNumber) {
-      await trpc.setFinalStatus.mutate({
-        status: 'kPlus',
-        cow_num: selectedNumber,
-      });
-      setSelectedNumber(0);
-    }
-  };
-  const handleK = async () => {
-    if (selectedNumber) {
-      await trpc.setFinalStatus.mutate({
-        status: 'k',
-        cow_num: selectedNumber,
-      });
-      setSelectedNumber(0);
-    }
-  };
+
   const handlSave = async () => {
     if (selectedNumber !== 0) {
       await trpc.moveStage.mutate({
@@ -65,12 +47,11 @@ export default function Stage2() {
       setSelectedNumber(0);
     }
   };
-  const handlenumberClick = async (number: number) => {
+  const handleNumberClick = async (number: number) => {
     try {
       const data = await trpc.getCowData.mutate(number);
       if (data) {
         setStatus(data.status);
-        console.log(data.status);
       }
     } catch (err) {
       console.log(err);
@@ -98,7 +79,7 @@ export default function Stage2() {
         selectedNumber={selectedNumber}
         KosherNumbers={KosherList}
         setNum={setSelectedNumber}
-        handlenumberClick={handlenumberClick}
+        handlenumberClick={handleNumberClick}
       ></Table>
       {selectedNumber !== 0 && (
         <ImageBoard
@@ -119,20 +100,8 @@ export default function Stage2() {
         >
           Move to stage 3
         </button>
-        <button
-          onClick={handleK}
-          className="bg-cyan-400	 hover:bg-cyan-500 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300"
-        >
-          K
-        </button>
-        {status === 'kPlus' && (
-          <button
-            onClick={handleKPllus}
-            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300"
-          >
-            K+
-          </button>
-        )}
+
+
       </div>
     </div>
   );
